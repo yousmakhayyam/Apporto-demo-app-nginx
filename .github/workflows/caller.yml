@@ -1,0 +1,37 @@
+﻿name: Version Bump (Call Central)
+
+on:
+  workflow_dispatch:
+    inputs:
+      cluster:
+        description: 'Cluster (e.g., primary-01)'
+        required: true
+        default: 'primary-01'
+      tenant:
+        description: 'Tenant ID (e.g., uco)'
+        required: true
+        default: 'uco'
+      app:
+        description: 'App to bump'
+        required: true
+        type: choice
+        options:
+          - tenant-api
+          - tenant-app
+          - tenant-dragonfly
+      version:
+        description: 'New image tag (e.g., v1.0.5)'
+        required: true
+        default: 'v1.0.5'
+
+jobs:
+  trigger-bump:
+    # YE LINE CENTRAL REPO KO CALL KAR RAHI HAI
+    uses: yousmakhayyam/Apporto-demo-platform-workflows/.github/workflows/version-bump.yml@main
+    with:
+      cluster_name: ${{ inputs.cluster }}
+      tenant_id: ${{ inputs.tenant }}
+      app_name: ${{ inputs.app }}
+      new_version: ${{ inputs.version }}
+    secrets:
+      GITOPS_PAT: ${{ secrets.GITOPS_PAT }}
