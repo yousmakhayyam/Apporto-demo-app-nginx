@@ -1,7 +1,8 @@
 replicaCount: 2
 image:
-  repository: apporto/tenant-api
-  tag: "v1.0.6"
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
 service:
   type: ClusterIP
-  port: 8080
+  port: 80
